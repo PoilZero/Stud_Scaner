@@ -55,7 +55,7 @@ class HostScanner:
                 if output.get(target)==None:
                     output[target] = one_output[target]
                     continue
-                if output[target] == '存活':
+                if one_output[target] == '存活':
                     output[target] = '存活'
 
         # 打印存活主机
@@ -109,7 +109,7 @@ class HostScanner:
         packet = ether / arp
 
         # 发送ARP请求并获取响应
-        result = srp(packet, timeout=2, verbose=0)[0]
+        result = srp(packet, timeout=self.__delay, verbose=0)[0]
 
         # 分析响应并提取相关信息
         if len(result)>0:
@@ -122,10 +122,17 @@ class HostScanner:
             output[host] = '离线'
 
     def __ICMP_scan(self, host, output):
-        result = ping3.ping(host, src_addr=None)
-        if result:
-            with self.__print_lock:
-                print(f'ICMP: {host} 成功，耗时{result}s')
-            output[host] = '存活'
-        else:
+        try:
+            # 使用ping3库的ping函数发送ICMP请求
+            response_time = ping3.ping(host, timeout=self.__delay)
+            if response_time:
+                with self.__print_lock:
+                    print(f'ICMP: {host} 成功，耗时{response_time}s')
+                output[host] = '存活'
+                return True
+            else:
+                output[host] = '离线'
+                return False
+        except:
             output[host] = '离线'
+            return False

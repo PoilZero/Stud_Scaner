@@ -17,7 +17,7 @@ class BruteUI:
     def create_ui(self):
         # 创建窗口
         self.window = Tk()
-        self.window.title(f"{self.ip}:{self.port_number}的{self.brute_type}爆破建议")
+        self.window.title(f"{self.brute_type}爆破建议({self.ip}:{self.port_number})")
 
         # 定义选择文件函数
         def choose_file():

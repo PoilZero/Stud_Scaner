@@ -65,7 +65,7 @@ class PortScanner:
             for port in one_output:
                 if output.get(port)==None:
                     output[port] = one_output[port]
-                elif output[port]=='开放':
+                elif one_output[port]=='开放':
                     output[port] = '开放'
 
         # 打印端口
@@ -181,7 +181,6 @@ class PortScanner:
             print(f'检测特殊{ip}:{port_number}端口, 正在启动爆破窗口')
         gui = BruteUI(ip, port_number, Brute.PORT_DIC[port_number])
         gui.create_ui_thread()
-
 
     def __XMas_scan(self, ip, port_number, delay, output, message):
         src_port = RandShort()  # 生成随机源端口

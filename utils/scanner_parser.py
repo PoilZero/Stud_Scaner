@@ -7,7 +7,7 @@ parser = argparse.ArgumentParser(description='扫描器参数解析器')
 
 # 定义互斥参数组1
 protocol_group = parser.add_mutually_exclusive_group(required=True)
-protocol_group.add_argument('-hostscan', '-hs', nargs='+', choices=['ICMP', 'ARP', 'HTTP'], help='要扫描的协议类型，默认为ICMP')
+protocol_group.add_argument('-hostscan', '-hs', nargs='+', choices=['ICMP', 'ARP'], help='要扫描的协议类型')
 protocol_group.add_argument('-portscan', '-ps', nargs='+', choices=['TCP', 'UDP', 'FIN', 'SYN', 'ACK', 'XMAS'], help='要扫描的协议类型')
 
 # 定义互斥参数组2

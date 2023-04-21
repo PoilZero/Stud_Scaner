@@ -17,6 +17,9 @@ class Brute:
         self.var_dropdown = var_dropdown
 
     def solve(self):
+
+
+
         window = self.window
         brute_type = self.brute_type
         dic_path = self.var_dropdown.get()
@@ -46,7 +49,6 @@ class Brute:
                 break
         else:
             messagebox.showerror(f'{tag}爆破失败', '请检查字典文件或者尝试其他爆破方式')
-
 
     # 一个字典爆破mysql密码的函数
     @staticmethod
